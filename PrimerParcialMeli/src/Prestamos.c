@@ -79,9 +79,9 @@ int reanudarPrestamo(Prestamo* lista, int largo, int id)
 	int i;
 	for(i = 0; i < largo; i ++)
 	{
-		if(lista[i].estado == ACTIVO && lista[i].isEmpty == OCCUPIED)
+		if(lista[i].estado == PAUSADO && lista[i].isEmpty == OCCUPIED)
 		{
-			lista[i].estado = PAUSADO;
+			lista[i].estado = ACTIVO;
 			retorno = 0;
 		}
 	}
@@ -89,7 +89,30 @@ int reanudarPrestamo(Prestamo* lista, int largo, int id)
 	return retorno;
 }
 
+int saldarPrestamo(Prestamo* lista, int largo, int indice)
+{
+	int retorno = -1;
+	int i;
+	char confirma;
+	for(i = 0; i < largo; i ++)
+	{
+		if(lista[i].idPrestamo == lista[indice].idPrestamo && lista[i].isEmpty == OCCUPIED && lista[i].estado == ACTIVO)
+		{
+			printf("Seguro que desea saldar este prestamo?s/n.\n");
+			scanf("%c", &confirma);
+			if(confirma == 's')
+			{
+				lista[i].estado = SALDADO;
+				retorno = 0;
+			}
 
+		}
+	}
+
+
+
+	return retorno;
+}
 
 
 
